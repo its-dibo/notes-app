@@ -1,0 +1,61 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+      "baseUrl": "./",
+      "outDir": "./dist",
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+      "sourceMap": true,
+      "declaration": false,
+      "downlevelIteration": true,
+      "experimentalDecorators": true,
+      "moduleResolution": "node",
+      "importHelpers": true,
+      "target": "esnext",
+      "module": "esnext",
+      "lib": ["esnext", "dom", "dom.iterable"],
+      "types": ["node"],
+      "typeRoots": ["node_modules/@types", "**/@types"],
+      "removeComments": true,
+      "noEmit": false,
+      "noEmitOnError": false,
+      "noImplicitAny": true,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
+      "preserveSymlinks": true,
+      "sourceRoot": "",
+      "mapRoot": "",
+      "emitDecoratorMetadata": true,
+      "locale": "en",
+      "watch": false,
+      "resolveJsonModule": true,
+      "paths": {
+        "~*": ["./*"]
+      },
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "allowJs": true,
+      "strictPropertyInitialization": false,
+      "skipLibCheck": true,
+      "suppressImplicitAnyIndexErrors": true
+    },
+    "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/e2e", "**/test.ts"],
+    "angularCompilerOptions": {
+      "enableIvy": true,
+      "strictTemplates": true,
+      "strictAttributeTypes": false
+    },
+    "ts-node": {
+      "compilerOptions": {
+        "sourceMap": false
+      },
+      "esm": true,
+      "require": ["tsconfig-paths/register"],
+      "transpileOnly": true,
+      "moduleTypes": {
+        "**/jest.config.ts": "cjs"
+      }
+    }
+  }
