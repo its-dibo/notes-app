@@ -1,7 +1,13 @@
 import express, { NextFunction, Request, Response } from "express";
 import apiV1 from "./routes/v1";
+import cors from "cors"
 
 let app = express();
+
+
+app.use(cors({origin: [/localhost/]}))
+app.use(express.json())
+
 
 /**
  * log the request info for debugging
@@ -25,3 +31,6 @@ app.use(
 // todo: dynamically load the appropriate api version
   apiV1
 );
+
+
+app.listen('4000', () => console.log(`app is listening to the port 4000`));
