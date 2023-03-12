@@ -1,0 +1,35 @@
+// fix: only works from a success reponse http://localhost:5000/test
+
+
+let apiVersion = 'v1', 
+  Authorization ="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjF9.FRKbJkLhofLTB1IcxfSzXH8QNGm3t4s_GjaOXY3xotE", 
+  baseUrl = 'http://localhost:4000' 
+
+function request(path, options={}) {
+  if(typeof options==="string")options = {method: options}
+  if(options.body && typeof options.body!=='string'){
+    options.body=JSON.stringify(options.body)
+    options.headers= {'Content-Type': 'application/json'}
+   }
+  
+  return fetch(`${baseUrl}/api/${apiVersion}/${path}`, {
+    method: options.body? 'POST':'GET',
+    ...options,
+    headers: new Headers({
+      Authorization,
+      ... options.headers
+    }),
+   
+  })
+    .then((res) => {
+      let resCloned = res.clone();
+      return res
+        .json()        
+        .catch((err) => resCloned.text());
+    })
+    .then((val) => console.log(val));
+}
+
+ request("send", {body: { users: [2,3], noteType: 1, title: "test" , body: "a test note", sentBy:1 }})
+
+
