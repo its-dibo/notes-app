@@ -49,9 +49,10 @@
     },
     "ts-node": {
       "compilerOptions": {
-        "sourceMap": false
+        "sourceMap": false,
+        "module": "CommonJS"
       },
-      "esm": true,
+      "esm": false,
       "require": ["tsconfig-paths/register"],
       "transpileOnly": true,
       "moduleTypes": {
