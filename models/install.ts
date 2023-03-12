@@ -1,22 +1,15 @@
-// install the sqlite db
-// todo: throw an error when running over an existing database
-
-import sqlite3 from 'sqlite3'
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-let db = new sqlite3.Database(resolve(__dirname,'../db.sqlite'));
-
-
+import db from '~database'
 
 // the media files is stored in /files/$note_id/$file_path
+// relations: 
+//   - note_type -> note_types
+//   - sent_by -> entities
 db.run(`CREATE TABLE IF NOT EXISTS notes (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
    	title TEXT NOT NULL,
    	body TEXT NOT NULL,
-	note_type INTEGER DEFAULT 1
+	note_type INTEGER DEFAULT 1,
+	sent_by INTEGER
     )`);
 
 db.run(`CREATE TABLE IF NOT EXISTS entities (
@@ -33,4 +26,4 @@ db.run(`CREATE TABLE IF NOT EXISTS note_types (
 )`);
 
 
-db.close();
+// db.close();
