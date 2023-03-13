@@ -12,11 +12,14 @@ export class User {
  * sends a note to one or multiple users with specific type
  */
 export default function (req: Request, res: Response) {
-  let { users, type = 1, title, body, sentBy } = req.body;
-
+  // @ts-ignore
+  let sender = req.auth.userId
+  let { users, type = 1, title, body } = req.body;
+  
   // validate the body schema before processing
   // todo: validate that all users and sentBy are exists in the database
-  if (users?.length < 1)
+  if(!sender)res.status(401).json({ error: `unauthorized access` });
+  else if (users?.length < 1)
     res.status(500).json({ error: `select the users to send the note` });
   else if (!title || title.trim() === "")
     res.status(500).json({ error: `the title is required` });
@@ -25,7 +28,7 @@ export default function (req: Request, res: Response) {
   else {
     let values = users.map( 
       (user: string | number) =>
-        `("${user}", "${title}", "${body}", "${type}", "${sentBy}")`
+        `("${user}", "${title}", "${body}", "${type}", "${sender}")`
     );
 
     // todo: use placeholders

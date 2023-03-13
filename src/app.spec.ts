@@ -17,7 +17,6 @@ beforeAll(async () => {
     noteType: 1,
     title: "test",
     body: "a test note",
-    sentBy: 1,
     type: 1,
   };
 });
@@ -57,7 +56,7 @@ describe("routes (api version v1)", () => {
       .then((res) => {
         expect(res.status).toEqual(200);
         expect(res.body.length).toEqual(2);
-        expect(res.body[0].sent_by).toEqual(notes.sentBy);
+        expect(res.body[0].sent_by).toEqual(1);
       }));
 
   test("list notes for specific user", () =>
