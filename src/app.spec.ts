@@ -13,7 +13,8 @@ beforeAll(async () => {
   testServer = supertest(app);
   await db.exec(`DELETE from notes`);
   notes = {
-    users: [2, 3],
+    // the user can include himself in the target users, i.e. can send a note to himself
+    users: [1, 2, 3],
     noteType: 1,
     title: "test",
     body: "a test note",
@@ -55,17 +56,17 @@ describe("routes (api version v1)", () => {
       .set("Authorization", auth)
       .then((res) => {
         expect(res.status).toEqual(200);
-        expect(res.body.length).toEqual(2);
+        expect(res.body.length).toEqual(3);
         expect(res.body[0].sent_by).toEqual(1);
       }));
 
-  test("list notes for specific user", () =>
+  test("list notes for the current user", () =>
     testServer
-      .get("/api/v1/list/2")
+      .get("/api/v1/list")
       .set("Authorization", auth)
       .then((res) => {
         expect(res.status).toEqual(200);
         expect(res.body.length).toEqual(1);
-        expect(res.body[0].user).toEqual(2);
+        expect(res.body[0].user).toEqual(1);
       }));
 });

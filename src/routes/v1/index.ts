@@ -12,6 +12,6 @@ router.use((req: Request, res: Response, next: NextFunction) => {
 router.use(authMiddleware);
 router.post("/send", sendNotesRoute);
 router.get("/list/all", listNotesRoute);
-router.get("/list/:userId", listNotesRoute);
+router.get("/list", listNotesRoute);
 
 export default router;

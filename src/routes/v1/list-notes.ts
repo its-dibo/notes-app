@@ -9,8 +9,9 @@ import db from "~database";
  * - supports pagination
  */
 export default function (req: Request, res: Response) {
-  let userId = req.url.split("/")[2],
-    condition = userId !== "all" ? `where user=${userId}` : "";
+  let userId = req.auth.userId,
+    allNotes = req.url.split("/")[2] === 'all',
+    condition = !allNotes ? `where user=${userId}` : "";    
 
   // todo: get enabled notes only
   db.all(
