@@ -25,12 +25,16 @@ db.run(`CREATE TABLE IF NOT EXISTS note_types (
     disabled INTEGER default 0
 )`);
 
-db.run(`
-   INSERT INTO note_types (name, disabled) VALUES
-   ("normal", 0),
-   ("alert", 0),
-   ("reminder", 0),
-   ("disabled_example", 1)
-`);
+
+db.run(`delete from note_types`,function(error){
+    db.run(`
+    INSERT INTO note_types (name, disabled) VALUES
+    ("normal", 0),
+    ("alert", 0),
+    ("reminder", 0),
+    ("disabled_example", 1)
+ `);
+})
+
 
 // db.close();
