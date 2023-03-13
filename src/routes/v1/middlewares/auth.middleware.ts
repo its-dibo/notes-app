@@ -6,8 +6,8 @@ import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
  */
 export default function (req: Request, res: Response, next: NextFunction) {
   // format: `"Authorization": "Bearer ****"`
-  let [schema, token] = req.header("Authorization")?.split(" ") as string[];
-
+  let [schema, token] = req.header("Authorization")?.split(" ") || [] as string[];
+ 
   if (!token) next("headers must contain a valid auth token");
   else if (schema !== "Bearer")
     next(`the auth schema ${schema} is not supported. use Bearer`);
