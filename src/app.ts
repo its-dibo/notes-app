@@ -33,4 +33,6 @@ app.use(
 );
 
 
-app.listen('4000', () => console.log(`app is listening to the port 4000`));
+export let server = app.listen('4000', () => console.log(`app is listening to the port 4000`));
+
+export default app
