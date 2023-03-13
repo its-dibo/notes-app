@@ -13,7 +13,7 @@ export default function (req: Request, res: Response) {
     allNotes = req.url.split("/")[2] === 'all',
     condition = !allNotes ? `where user=${userId}` : "";    
 
-  // todo: get enabled notes only
+  // todo: filter notes and enable paginating
   db.all(
     `select * from notes ${condition}`,
     function (error: Error, rows: any[]) {

@@ -10,6 +10,9 @@ router.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 router.use(authMiddleware);
+
+// todo: add upload middleware to accept media files
+// 'multer' is recommended
 router.post("/send", sendNotesRoute);
 router.get("/list/all", listNotesRoute);
 router.get("/list", listNotesRoute);
