@@ -12,7 +12,6 @@ export class User {
  * sends a note to one or multiple users with specific type
  */
 export default function (req: Request, res: Response) {
-  // @ts-ignore
   let sender = req.auth.userId
   let { users, type = 1, title, body } = req.body;
   

@@ -26,7 +26,6 @@ export default function (req: Request, res: Response, next: NextFunction) {
         );
       else {
         // todo: use a singleton class to store the userId, to be used in the subsequent requests
-        // @ts-ignore
         req.auth = payload;
         next();
       }
